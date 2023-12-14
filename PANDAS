@@ -1,0 +1,6 @@
+# Open and print file
+import pandas as pd
+
+df = pd.read_csv('Sample_Data_Age.csv')
+
+print(df.to_string()) 
