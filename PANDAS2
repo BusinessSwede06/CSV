@@ -1,0 +1,48 @@
+# Open file and read data
+import pandas as pd
+# Read File
+df_original = pd.read_csv('Sample_Data_Age.csv')
+# Filter People over 64
+filtered_df = df_original[df_original['Age'] > 64]
+# Count folks over 64
+count_over_64 = len(filtered_df)
+# Print count
+print(f"Number of people over 64: {count_over_64}")
+
+# Open and Read File
+df_seniors = pd.read_csv('Sample_Data_Age.csv')
+# Filter for people over 65
+seniors_df = df_seniors[df_seniors['Age'] > 65]
+# Print names and ages of seniors
+print("Names and Ages of Seniors:")
+print(seniors_df[['Name', 'Age']].to_string(index=False))
+# Save the seniors to a new CSV file
+seniors_df.to_csv('Seniors.csv', index=False)
+print("Seniors.csv file created.")
+
+# Open and Read File
+df_sorted = pd.read_csv('Sample_Data_Age.csv')
+# Sort alphabetically by names
+sorted_df = df_sorted.sort_values(by='Name')
+# Print names and ages alphabetically
+print("Names and Ages (Alphabetically):")
+print(sorted_df[['Name', 'Age']].to_string(index=False))
+# Save the sorted data to a new CSV file
+sorted_df.to_csv('alpha_all.csv', index=False)
+print("alpha_all.csv file created.")
+
+# Open and Read File
+df_age_groups = pd.read_csv('Sample_Data_Age.csv')
+# Define age groups
+bins = [18, 25, 36, 56, float('inf')]
+labels = ['18-24', '25-35', '36-55', 'Over 55']
+# Create a new column 'Age Group' based on the defined bins
+df_age_groups['Age Group'] = pd.cut(df_age_groups['Age'], bins=bins, labels=labels, right=False)
+# Count the number of people in each age group
+age_group_counts = df_age_groups.groupby('Age Group').size().reset_index(name='Count')
+# Print the counts
+print("Number of People in Each Age Group:")
+print(age_group_counts.to_string(index=False))
+# Save the counts to a new CSV file named "Age_data.csv"
+age_group_counts.to_csv('Age_data.csv', index=False)
+print("Age_data.csv file created.")
